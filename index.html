@@ -1,67 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Password Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-	<link rel="stylesheet" type="text/css" href="index.css">
-	 <script src="https://kit.fontawesome.com/96c792062e.js" crossorigin="anonymous"></script>
-<div class="container">
-	<h2>Password Generator</h2>
-	<div class="result-container">
-		<span id="result"></span>
-		<button class="btn" id="clipboard">
-			<i class="far fa-clipboard"></i>
-		</button>
-	</div>
-	<div class="settings">
-		<div class="setting">
-			<label>Password length</label>
-			<input type="number" id="length" min='4' max='20' value='20' />
-		</div>
-		<div class="setting">
-			<label>Include uppercase letters</label> 
-			<input type="checkbox" id="uppercase" checked />
-		</div>
-		<div class="setting">
-			<label>Include lowercase letters</label> 
-			<input type="checkbox" id="lowercase" checked />
-		</div>
-		<div class="setting">
-			<label>Include numbers</label> 
-			<input type="checkbox" id="numbers" checked />
-		</div>
-		<div class="setting">
-			<label>Include symbols</label> 
-			<input type="checkbox" id="symbols" checked />
-		</div>
-	</div>
-	<button class="btn btn-large" id="generate">
-		Generate password
-	</button>
-</div>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shield-alt"></i> Secure Password Generator</h1>
+            <p>Generate cryptographically secure passwords with advanced customization</p>
+        </header>
 
-<!-- SOCIAL PANEL HTML -->
-<div class="social-panel-container">
-	<div class="social-panel">
-		<p>Created  by
-			Navneet Jaguri</p>
-		<button class="close-btn"><i class="fas fa-times"></i></button>
-		<h4>Get in touch on</h4>
-		<ul>
-			<li>
-				<a href="https://www.linkedin.com/in/navneet-jaguri-956ba834a/" target="_blank">
-					<i class="fab fa-linkedin"></i>
-				</a>
-			</li>
-		</ul>
-	</div>
-</div>
-<button class="floating-btn">
-	Get in Touch
-</button>
-<script src = "main.js" type = "text/javascript"/></script>
+        <div class="generator-section">
+            <div class="password-display">
+                <input type="text" id="passwordOutput" placeholder="Generated password will appear here" readonly>
+                <div class="password-actions">
+                    <button id="copyBtn" class="action-btn" disabled>
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <button id="generateBtn" class="generate-btn">
+                        <i class="fas fa-key"></i> Generate Password
+                    </button>
+                </div>
+            </div>
+
+            <div class="strength-meter">
+                <div class="strength-info">
+                    <span id="strengthText">Password Strength: Not Generated</span>
+                    <span id="entropyText">Entropy: 0 bits</span>
+                </div>
+                <div class="strength-bar">
+                    <div id="strengthFill" class="strength-fill"></div>
+                </div>
+            </div>
+
+            <div class="clipboard-status" id="clipboardStatus"></div>
+        </div>
+
+        <div class="options-section">
+            <h3><i class="fas fa-cog"></i> Customization Options</h3>
+            
+            <div class="option-group">
+                <label for="lengthSlider">Password Length: <span id="lengthValue">16</span></label>
+                <input type="range" id="lengthSlider" min="8" max="64" value="16" class="slider">
+            </div>
+
+            <div class="option-group">
+                <h4>Character Types</h4>
+                <div class="checkbox-grid">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeUppercase" checked>
+                        <span class="checkmark"></span>
+                        Uppercase Letters (A-Z)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeLowercase" checked>
+                        <span class="checkmark"></span>
+                        Lowercase Letters (a-z)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeNumbers" checked>
+                        <span class="checkmark"></span>
+                        Numbers (0-9)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeSymbols" checked>
+                        <span class="checkmark"></span>
+                        Symbols (!@#$%^&*)
+                    </label>
+                </div>
+            </div>
+
+            <div class="option-group">
+                <h4>Security Options</h4>
+                <div class="checkbox-grid">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="avoidSimilar" checked>
+                        <span class="checkmark"></span>
+                        Avoid Similar Characters (0, O, l, I, 1)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="autoClipboard">
+                        <span class="checkmark"></span>
+                        Auto-clear Clipboard (15 seconds)
+                    </label>
+                </div>
+            </div>
+
+            <div class="option-group">
+                <label for="excludeChars">Exclude Custom Characters:</label>
+                <input type="text" id="excludeChars" placeholder="e.g., @#$ (characters to avoid)" class="text-input">
+            </div>
+        </div>
+
+        <footer>
+            <p><i class="fas fa-info-circle"></i> This tool uses Web Crypto API for secure randomness. Passwords are generated locally and never stored.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
-
